@@ -50,7 +50,7 @@ export default function HomePage() {
                 </div>
 
                 {/* <!-- Display paragraph: If there is no games  --> */}
-                <p className="no-articles">No games yet</p>
+                {/* <p className="no-articles">No games yet</p> */}
             </div>
         </section>
     );
