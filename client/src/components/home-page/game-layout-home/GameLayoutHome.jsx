@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-export default function GameLayoutHome({ game }) {
+export default function GameLayout({ game }) {
+    console.log(game)
     return (
 
         <div className="game">
@@ -12,8 +13,8 @@ export default function GameLayoutHome({ game }) {
                 <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
             </div>
             <div className="data-buttons">
-                <Link to="#" className="btn details-btn">Details</Link>
+                <Link to={`/games/${game._id}`} className="btn details-btn">Details</Link>
             </div>
-        </div>
+        </div >
     );
 }

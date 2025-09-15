@@ -1,7 +1,6 @@
 import GameLayoutHome from "./game-layout-home/GameLayoutHome";
 
 export default function HomePage({ games }) {
-
     return (
         <section id="welcome-world">
 
