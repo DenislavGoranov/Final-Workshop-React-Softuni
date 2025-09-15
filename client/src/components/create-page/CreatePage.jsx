@@ -1,13 +1,24 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePage() {
     const [formValues, setFormValues] = useState({});
+    const navigate = useNavigate();
 
-    const submitFormHandler = (e) => {
+    const submitFormHandler = async (e) => {
         e.preventDefault();
 
-        console.log('submitted: ', formValues);
+        const response = await fetch(`http://localhost:3030/data/games`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application-json",
+            },
+            body: JSON.stringify(formValues),
+        });
 
+        console.log(response.status);
+
+        navigate(`/games`);
     }
 
     const onChange = (e) => {
