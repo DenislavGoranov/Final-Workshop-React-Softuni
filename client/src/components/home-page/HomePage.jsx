@@ -1,21 +1,7 @@
-import { useEffect, useState } from "react";
 import GameLayout from "../game-layout/GameLayout";
 
-export default function HomePage() {
-    const [games, setGames] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:3030/data/games?sortBy=_createdOn%20desc');
-                const gamesData = await response.json();
+export default function HomePage({ games }) {
 
-                setGames(gamesData);
-            } catch (err) {
-                console.log(err.message);
-            }
-        }
-        fetchData();
-    }, [])
     return (
         <section id="welcome-world">
 
