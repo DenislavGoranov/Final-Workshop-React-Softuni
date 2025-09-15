@@ -11,7 +11,7 @@ export default function CreatePage() {
         await fetch(`http://localhost:3030/data/games`, {
             method: "POST",
             headers: {
-                "Content-Type": "application-json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(formValues),
         });
