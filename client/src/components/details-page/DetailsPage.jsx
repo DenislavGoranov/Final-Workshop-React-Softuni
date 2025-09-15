@@ -1,4 +1,4 @@
-export default function DetailsPage() {
+export default function DetailsPage({ game }) {
     return (
         < section id="game-details" >
             <h1>Game Details</h1>
