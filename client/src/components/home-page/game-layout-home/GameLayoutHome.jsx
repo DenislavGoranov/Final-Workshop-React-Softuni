@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function GameLayout({ game }) {
-    console.log(game)
     return (
 
         <div className="game">
