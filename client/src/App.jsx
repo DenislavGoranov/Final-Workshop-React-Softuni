@@ -1,5 +1,6 @@
 import CatalogPage from "./components/catalog-page/CatalogPage";
 import CreatePage from "./components/create-page/CreatePage";
+import DetailsPage from "./components/details-page/DetailsPage";
 import Header from "./components/header/Header";
 import HomePage from "./components/home-page/HomePage";
 import Login from './components/login/Login';
@@ -32,6 +33,7 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<HomePage games={games} />} />
                 <Route path='games' element={<CatalogPage games={games} />} />
+                <Route path='games/:id' element={<DetailsPage />} />
                 <Route path='create' element={<CreatePage />} />
                 <Route path='login' element={<Login />} />
                 <Route path='register' element={<Register />} />
