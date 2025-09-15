@@ -11,17 +11,28 @@ export default function Login() {
     const submitFormHandler = async (e) => {
         e.preventDefault();
 
-        await fetch(`http://localhost:3030/users/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userData),
-        });
+        try {
+            const response = await fetch(`http://localhost:3030/users/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
+            });
 
-        console.log('Logged in: ', userData)
+            if (response.status == 403) {
+                throw new Error('Invalid User');
+            }
 
-        navigate(`/`);
+            if (!response.ok) {
+                throw new Error('Login Failed');
+            }
+
+            console.log('Logged in: ', userData)
+            navigate(`/`);
+        } catch (err) {
+            console.log(err.message);
+        }
     }
 
     const onChange = (e) => {
