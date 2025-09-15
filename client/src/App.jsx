@@ -1,7 +1,9 @@
 import CatalogPage from "./components/catalog-page/CatalogPage";
-import DetailsPage from "./components/details-page/DetailsPage";
+import CreatePage from "./components/create-page/CreatePage";
 import Header from "./components/header/Header";
 import HomePage from "./components/home-page/HomePage";
+
+import { Route, Routes } from 'react-router-dom';
 
 export default function App() {
 
@@ -9,14 +11,14 @@ export default function App() {
         <div id="box">
             <Header />
 
+            <Routes>
+                <Route path='/' element={<HomePage />} />
+                <Route path='games' element={<CatalogPage />} />
+                <Route path='create' element={<CreatePage />} />
+            </Routes>
+
             <main id="main-content">
             </main>
-
-            <HomePage />
-
-            <DetailsPage />
-
-            <CatalogPage />
         </div>
     )
 }
