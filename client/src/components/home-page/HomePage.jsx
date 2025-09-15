@@ -1,4 +1,4 @@
-import GameLayout from "../game-layout/GameLayout";
+import GameLayoutHome from "./game-layout-home/GameLayoutHome";
 
 export default function HomePage({ games }) {
 
@@ -14,7 +14,7 @@ export default function HomePage({ games }) {
             <div id="home-page">
                 <h1>Latest Games</h1>
 
-                {games.map((game) => <GameLayout key={game._id} game={game} />)}
+                {games.map((game) => <GameLayoutHome key={game._id} game={game} />)}
 
                 {games.length == 0 && <p className="no-articles">No games yet</p>}
 

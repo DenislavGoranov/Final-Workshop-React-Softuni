@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function GameLayout({ game }) {
+export default function GameLayoutHome({ game }) {
     return (
 
         <div className="game">
