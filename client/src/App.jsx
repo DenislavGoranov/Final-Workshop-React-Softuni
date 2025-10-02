@@ -1,4 +1,5 @@
-import { getAll } from "./api/games-api";
+import { Route, Routes } from 'react-router-dom';
+
 import CatalogPage from "./components/catalog-page/CatalogPage";
 import CreatePage from "./components/create-page/CreatePage";
 import DetailsPage from "./components/details-page/DetailsPage";
@@ -7,24 +8,10 @@ import HomePage from "./components/home-page/HomePage";
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 
-import { useEffect, useState } from "react";
-
-import { Route, Routes } from 'react-router-dom';
+import useGames from "./hooks/useGames";
 
 export default function App() {
-    const [games, setGames] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const gamesData = await getAll();
-
-                setGames(gamesData);
-            } catch (err) {
-                console.log(err.message);
-            }
-        }
-        fetchData();
-    }, [])
+    const [games] = useGames();
 
     return (
         <div id="box">
