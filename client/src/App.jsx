@@ -1,3 +1,4 @@
+import { getAll } from "./api/games-api";
 import CatalogPage from "./components/catalog-page/CatalogPage";
 import CreatePage from "./components/create-page/CreatePage";
 import DetailsPage from "./components/details-page/DetailsPage";
@@ -15,8 +16,7 @@ export default function App() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3030/data/games?sortBy=_createdOn%20desc');
-                const gamesData = await response.json();
+                const gamesData = await getAll();
 
                 setGames(gamesData);
             } catch (err) {
@@ -33,7 +33,7 @@ export default function App() {
             <Routes>
                 <Route path='/' element={<HomePage games={games} />} />
                 <Route path='games' element={<CatalogPage games={games} />} />
-                <Route path='games/:id' element={<DetailsPage />} />
+                <Route path='games/:gameId' element={<DetailsPage />} />
                 <Route path='create' element={<CreatePage />} />
                 <Route path='login' element={<Login />} />
                 <Route path='register' element={<Register />} />
