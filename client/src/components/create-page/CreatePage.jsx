@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postGame } from "../../api/games-api";
 
 export default function CreatePage() {
     const [formValues, setFormValues] = useState({});
@@ -8,13 +9,7 @@ export default function CreatePage() {
     const submitFormHandler = async (e) => {
         e.preventDefault();
 
-        await fetch(`http://localhost:3030/data/games`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formValues),
-        });
+        await postGame(formValues);
 
         navigate(`/games`);
     }
