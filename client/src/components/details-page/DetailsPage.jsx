@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 
 export default function DetailsPage() {
     const [gameData, setGameData] = useState({});
-    const { id } = useParams();
+    const { gameId } = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://localhost:3030/data/games/${id}`);
-            const data = await response.json();
+            // const response = await fetch(`http://localhost:3030/data/games/${id}`);
+            // const data = await response.json();
+
+            const data = await getOne(gameId);
             setGameData(data);
         }
         fetchData();
