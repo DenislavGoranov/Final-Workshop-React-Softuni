@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { getAll } from "../api/games-api";
+import { getAll, getOne } from "../api/games-api";
 
-export default function useGames() {
+export function useGetAllGames() {
     const [games, setGames] = useState([]);
     useEffect(() => {
             const fetchData = async () => {
@@ -19,5 +19,20 @@ export default function useGames() {
 
     return [
         games,
+    ]
+}
+
+export function useGetOneGame(gameId) {
+    const [gameData, setGameData] = useState({});
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getOne(gameId);
+            setGameData(data);
+        }
+    fetchData();
+    }, [])
+
+    return [
+        gameData
     ]
 }
