@@ -7,3 +7,9 @@ export const getAll = async () => {
 
     return result;
 }
+
+export const getRecent = async () => {
+    const result = await requester.get(`${BASE_URL}/?sortBy=_createdOn%20desc&distinct=category`);
+
+    return result;
+}
