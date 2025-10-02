@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { getOne } from "../../api/games-api";
 
 export default function DetailsPage() {
     const [gameData, setGameData] = useState({});
