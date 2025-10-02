@@ -8,9 +8,6 @@ export default function DetailsPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            // const response = await fetch(`http://localhost:3030/data/games/${id}`);
-            // const data = await response.json();
-
             const data = await getOne(gameId);
             setGameData(data);
         }
