@@ -13,3 +13,9 @@ export const getRecent = () => {
 
     return result;
 }
+
+export const getOne = (gameId) => {
+    const result = requester.get(`${BASE_URL}/${gameId}`);
+
+    return result;
+}
