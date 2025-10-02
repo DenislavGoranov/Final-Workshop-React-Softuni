@@ -1,11 +1,11 @@
-async function requester(method, url, data = {}) {
+async function requester(method, url, data) {
     const options = {}
 
     if (method !== "GET") {
         options.method = method;
     }
 
-    if (data != {}) {
+    if (data) {
         options.headers = {
             'Content-Type': "application/json",
         };
@@ -18,10 +18,10 @@ async function requester(method, url, data = {}) {
     return result;
 }
 
-const get = (url) => requester("GET", url);
+const get = (url, data) => requester("GET", url, data);
 const post = (url, data) => requester("POST", url, data);
 const put = (url, data) => requester("PUT", url, data);
-const del = (url) => requester("DELETE", url);
+const del = (url, data) => requester("DELETE", url, data);
 
 export default {
     get,
