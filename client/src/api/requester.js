@@ -21,7 +21,7 @@ async function requester(method, url, data = {}) {
 const get = (url) => requester("GET", url);
 const post = (url, data) => requester("POST", url, data);
 const put = (url, data) => requester("PUT", url, data);
-const del = (url, data) => requester("DELETE", url, data);
+const del = (url) => requester("DELETE", url);
 
 export default {
     get,
