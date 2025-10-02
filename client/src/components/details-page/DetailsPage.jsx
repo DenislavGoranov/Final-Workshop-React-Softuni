@@ -1,18 +1,11 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getOne } from "../../api/games-api";
+import { useGetOneGame } from "../../hooks/useGames";
+
 
 export default function DetailsPage() {
-    const [gameData, setGameData] = useState({});
     const { gameId } = useParams();
+    const [gameData] = useGetOneGame(gameId);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await getOne(gameId);
-            setGameData(data);
-        }
-        fetchData();
-    }, [])
     return (
         < section id="game-details" >
             <h1>Game Details</h1>

@@ -8,10 +8,10 @@ import HomePage from "./components/home-page/HomePage";
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 
-import useGames from "./hooks/useGames";
+import { useGetAllGames } from "./hooks/useGames";
 
 export default function App() {
-    const [games] = useGames();
+    const [games] = useGetAllGames();
 
     return (
         <div id="box">
