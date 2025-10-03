@@ -1,12 +1,9 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
 import { useRegister } from "../../hooks/useAuth";
 
 export default function Register() {
-
-    const navigate = useNavigate();
     const registerHandler = useRegister();
     const { values, onChange, submitHandler } = useForm(
         { email: '', password: '', "confirm-password": '' },
