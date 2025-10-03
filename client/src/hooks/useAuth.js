@@ -1,8 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import { login, register } from "../api/auth-api";
 
 export const useLogin = () => {
+    const navigate = useNavigate();
     const loginHandler = async (email, password) => {
-        await login(email, password);
+        try {
+            await login(email, password);
+            navigate('/');
+        } catch (err) {
+            console.log(err.message);
+        }
     }
 
     return loginHandler;
