@@ -16,8 +16,14 @@ export const useLogin = () => {
 }
 
 export const useRegister = () => {
+    const navigate = useNavigate();
     const registerHandler = async (email, password) => {
-        await register(email,password)
+        try {
+            await register(email,password)
+            navigate('/')
+        } catch (err) {
+            console.log(err.message);
+        }
     }
 
     return registerHandler;
