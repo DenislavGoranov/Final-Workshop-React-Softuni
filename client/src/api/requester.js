@@ -7,13 +7,13 @@ async function requester(method, url, data) {
 
     if (data) {
         options.headers = {
-            'Content-Type': "application/json",
+            'Content-type': "application/json",
         };
 
         options.body = JSON.stringify(data);
     }
     const response = await fetch(url, options);
-    const result = response.json()
+    const result = await response.json()
 
     return result;
 }

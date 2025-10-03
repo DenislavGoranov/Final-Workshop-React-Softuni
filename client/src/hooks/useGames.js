@@ -30,7 +30,7 @@ export function useGetOneGame(gameId) {
             setGameData(data);
         }
     fetchData();
-    }, [])
+    }, [gameId])
 
     return [
         gameData
