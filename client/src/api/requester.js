@@ -5,15 +5,27 @@ async function requester(method, url, data) {
         options.method = method;
     }
 
-    if (data) {
+    if (data && Object.keys(data).length > 0) {
         options.headers = {
             'Content-type': "application/json",
         };
-
         options.body = JSON.stringify(data);
     }
+
     const response = await fetch(url, options);
-    const result = await response.json()
+
+    let result;
+    try {
+        result = await response.json();
+    } catch {
+        result = null; 
+    }
+
+    if (!response.ok) {
+        const error = new Error(result?.message || response.statusText);
+        error.status = response.status;
+        throw error;
+    }
 
     return result;
 }
