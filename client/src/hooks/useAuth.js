@@ -25,9 +25,14 @@ export const useLogin = () => {
 
 export const useRegister = () => {
     const navigate = useNavigate();
+
+    const {changeAuthState} = useContext(AuthContext);
+
     const registerHandler = async (email, password) => {
         try {
-            await register(email,password)
+            const result = await register(email,password);
+
+            changeAuthState(result);
             navigate('/')
         } catch (err) {
             console.log(err.message);

@@ -5,7 +5,7 @@ async function requester(method, url, data) {
         options.method = method;
     }
 
-    if (data && Object.keys(data).length > 0) {
+    if (data) {
         options.headers = {
             'Content-type': "application/json",
         };
