@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postGame } from "../../api/games-api";
+import { create } from "../../api/games-api";
 
 export default function CreatePage() {
     const [formValues, setFormValues] = useState({});
@@ -9,7 +9,7 @@ export default function CreatePage() {
     const submitFormHandler = async (e) => {
         e.preventDefault();
 
-        await postGame(formValues);
+        await create(formValues);
 
         navigate(`/games`);
     }

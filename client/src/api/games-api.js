@@ -20,7 +20,7 @@ export const getOne = (gameId) => {
     return result;
 }
 
-export const postGame = (gameData) => {
+export const create = (gameData) => {
     const result = requester.post(BASE_URL, gameData);
 
     return result;
