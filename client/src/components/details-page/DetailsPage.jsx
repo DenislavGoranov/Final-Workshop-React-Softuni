@@ -1,30 +1,35 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
 import { useGetOneGame } from "../../hooks/useGames";
-import { useCreateComment } from "../../hooks/useComment";
+import { useCreateComment, useGetAllComments } from "../../hooks/useComment";
+import CommentLayout from "./comment-layout/CommentLayout";
 
 const initialValues = {
-    comment: '',
+    comments: '',
 }
 
 export default function DetailsPage() {
+    const createComment = useCreateComment();
+    const navigate = useNavigate();
     const { gameId } = useParams();
+
     const [gameData] = useGetOneGame(gameId);
     const accessToken = localStorage.getItem('accessToken');
-    // TODO: find a way to check if is the owner of the game
-    const isOwner = true;
-    // TODO: find a way to check how much comments we got about this game
-    let comments = 2;
-    const createComment = useCreateComment();
+    const isOwner = !!accessToken;
+
     const { values, onChange, submitHandler } = useForm(initialValues, async (values) => {
         try {
             const result = await createComment(gameId, values);
+
+            navigate(`http://localhost:3030/games/${gameId}/details`)
             console.log(result);
         } catch (err) {
             console.log(err.message);
         }
-    })
+    });
+
+    const comments = useGetAllComments(gameId);
 
     return (
         < section id="game-details" >
@@ -45,16 +50,10 @@ export default function DetailsPage() {
                 {/* <!-- Bonus ( for Guests and Users ) --> */}
                 <div className="details-comments">
                     <h2>Comments:</h2>
-                    {comments
+                    {comments.length > 0
                         ?
                         <ul>
-                            {/* <!-- list all comments for current game (If any) --> */}
-                            <li className="comment">
-                                <p>Content: I rate this one quite highly.</p>
-                            </li>
-                            <li className="comment">
-                                <p>Content: The best game.</p>
-                            </li>
+                            {comments.map(comment => <CommentLayout commentData={comment} key={comment._id} />)}
                         </ul>
                         :
                         <p className="no-comment">No comments.</p>
