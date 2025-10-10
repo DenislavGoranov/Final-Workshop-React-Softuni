@@ -12,7 +12,7 @@ export default function GameLayout({ game }) {
                 <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
             </div>
             <div className="data-buttons">
-                <Link to={`/games/${game._id}`} className="btn details-btn">Details</Link>
+                <Link to={`/games/${game._id}/details`} className="btn details-btn">Details</Link>
             </div>
         </div >
     );

@@ -5,18 +5,15 @@ import { login, register } from "../api/auth-api";
 import { AuthContext } from "../contexts/AuthContext";
 
 export const useLogin = () => {
-    const navigate = useNavigate();
-
     const {changeAuthState} = useContext(AuthContext);
 
     const loginHandler = async (email, password) => {
         try {
-            const result = await login(email, password);
-            
-            changeAuthState(result);
-            navigate('/');
+            const {password: _, ...authData} = await login(email, password);
 
-            return result;
+            changeAuthState(authData);
+
+            return authData;
         } catch (err) {
             console.log(err.message);
         }
@@ -25,16 +22,15 @@ export const useLogin = () => {
 }
 
 export const useRegister = () => {
-    const navigate = useNavigate();
-
     const {changeAuthState} = useContext(AuthContext);
 
     const registerHandler = async (email, password) => {
         try {
-            const result = await register(email,password);
+            const {password: _, ...authData} = await register(email,password);
 
-            changeAuthState(result);
-            navigate('/')
+            changeAuthState(authData);
+
+            return authData;
         } catch (err) {
             console.log(err.message);
         }

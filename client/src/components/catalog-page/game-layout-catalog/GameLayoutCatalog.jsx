@@ -7,7 +7,7 @@ export default function GameLayoutCatalog({ game }) {
                 <img src={game.imageUrl} />
                 <h2>{game.title}</h2>
                 <h4>{game.category}</h4>
-                <Link to={`/games/${game._id}`} className="details-button">Details</Link>
+                <Link to={`/games/${game._id}/details`} className="details-button">Details</Link>
             </div>
 
         </div>

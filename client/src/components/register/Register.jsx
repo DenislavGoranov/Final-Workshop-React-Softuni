@@ -7,7 +7,11 @@ export default function Register() {
     const registerHandler = useRegister();
     const { values, onChange, submitHandler } = useForm(
         { email: '', password: '', "confirm-password": '' },
-        async ({ email, password }) => await registerHandler(email, password),
+        async ({ email, password }) => {
+            await registerHandler(email, password);
+            localStorage.setItem('accessToken', result.accessToken);
+            localStorage.setItem('email', result.email)
+        },
     );
 
     return (
