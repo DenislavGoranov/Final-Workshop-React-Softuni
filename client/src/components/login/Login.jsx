@@ -8,7 +8,13 @@ export default function Login() {
     const { values, onChange, submitHandler } = useForm(
         { email: '', password: '' },
         async ({ email, password }) => {
-            await loginHandler(email, password);
+            try {
+                const result = await loginHandler(email, password);
+                localStorage.setItem('accessToken', result.accessToken);
+                localStorage.setItem('email', result.email)
+            } catch (err) {
+
+            }
         },
     );
 
