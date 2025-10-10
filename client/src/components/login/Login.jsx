@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
 import { useLogin } from "../../hooks/useAuth";
 
 export default function Login() {
+    const navigate = useNavigate();
     const loginHandler = useLogin();
     const { values, onChange, submitHandler } = useForm(
         { email: '', password: '' },
@@ -12,8 +13,10 @@ export default function Login() {
                 const result = await loginHandler(email, password);
                 localStorage.setItem('accessToken', result.accessToken);
                 localStorage.setItem('email', result.email)
-            } catch (err) {
 
+                navigate('/');
+            } catch (err) {
+                console.log(err.message);
             }
         },
     );
