@@ -1,13 +1,31 @@
 import { useParams } from "react-router-dom";
-import { useGetOneGame } from "../../hooks/useGames";
 
+import useForm from "../../hooks/useForm";
+import { useGetOneGame } from "../../hooks/useGames";
+import { useCreateComment } from "../../hooks/useComment";
+
+const initialValues = {
+    comment: '',
+}
 
 export default function DetailsPage() {
     const { gameId } = useParams();
     const [gameData] = useGetOneGame(gameId);
     const accessToken = localStorage.getItem('accessToken');
+    // TODO: find a way to check if is the owner of the game
     const isOwner = true;
-    const comments = 2;
+    // TODO: find a way to check how much comments we got about this game
+    let comments = 2;
+    const createComment = useCreateComment();
+    const { values, onChange, submitHandler } = useForm(initialValues, async (values) => {
+        try {
+            const result = await createComment(gameId, values);
+            console.log(result);
+        } catch (err) {
+            console.log(err.message);
+        }
+    })
+
     return (
         < section id="game-details" >
             <h1>Game Details</h1>
@@ -54,8 +72,8 @@ export default function DetailsPage() {
             {accessToken &&
                 <article className="create-comment">
                     <label>Add new comment:</label>
-                    <form className="form">
-                        <textarea name="comment" placeholder="Comment......"></textarea>
+                    <form className="form" onSubmit={submitHandler}>
+                        <textarea name="comment" placeholder="Comment......" value={values.comment} onChange={onChange}></textarea>
                         <input className="btn submit" type="submit" value="Add Comment" />
                     </form>
                 </article>
