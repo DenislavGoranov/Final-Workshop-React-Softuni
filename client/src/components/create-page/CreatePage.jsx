@@ -1,28 +1,32 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { create } from "../../api/games-api";
+import useForm from "../../hooks/useForm";
+
+const initialValues = {
+    title: '',
+    category: '',
+    maxLevel: '',
+    imageUrl: '',
+}
 
 export default function CreatePage() {
-    const [formValues, setFormValues] = useState({});
     const navigate = useNavigate();
 
-    const submitFormHandler = async (e) => {
-        e.preventDefault();
+    const { values, onChange, submitHandler } = useForm(
+        initialValues,
+        async () => {
+            try {
+                const { _id: gameId } = await create(values);
+                navigate(`/games/${gameId}/details`);
+            } catch (err) {
+                console.log(err.message);
+            }
+        });
 
-        await create(formValues);
-
-        navigate(`/games`);
-    }
-
-    const onChange = (e) => {
-        setFormValues((oldValues) => ({
-            ...oldValues,
-            [e.target.name]: e.target.value,
-        }));
-    }
     return (
         <section id="create-page" className="auth">
-            <form id="create" onSubmit={submitFormHandler}>
+            <form id="create" onSubmit={submitHandler}>
                 <div className="container">
 
                     <h1>Create Game</h1>
