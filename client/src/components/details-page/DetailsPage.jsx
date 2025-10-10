@@ -5,7 +5,9 @@ import { useGetOneGame } from "../../hooks/useGames";
 export default function DetailsPage() {
     const { gameId } = useParams();
     const [gameData] = useGetOneGame(gameId);
-
+    const accessToken = localStorage.getItem('accessToken');
+    const isOwner = true;
+    const comments = 2;
     return (
         < section id="game-details" >
             <h1>Game Details</h1>
@@ -25,36 +27,39 @@ export default function DetailsPage() {
                 {/* <!-- Bonus ( for Guests and Users ) --> */}
                 <div className="details-comments">
                     <h2>Comments:</h2>
-                    <ul>
-                        {/* <!-- list all comments for current game (If any) --> */}
-                        <li className="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li className="comment">
-                            <p>Content: The best game.</p>
-                        </li>
-                    </ul>
-                    {/* <!-- Display paragraph: If there are no games in the database --> */}
-                    <p className="no-comment">No comments.</p>
+                    {comments
+                        ?
+                        <ul>
+                            {/* <!-- list all comments for current game (If any) --> */}
+                            <li className="comment">
+                                <p>Content: I rate this one quite highly.</p>
+                            </li>
+                            <li className="comment">
+                                <p>Content: The best game.</p>
+                            </li>
+                        </ul>
+                        :
+                        <p className="no-comment">No comments.</p>
+                    }
                 </div>
 
-                {/* <!-- Edit/Delete buttons ( Only for creator of this game )  --> */}
-                <div className="buttons">
-                    <a href="#" className="button">Edit</a>
-                    <a href="#" className="button">Delete</a>
-                </div>
+                {isOwner &&
+                    <div className="buttons">
+                        <a href="#" className="button">Edit</a>
+                        <a href="#" className="button">Delete</a>
+                    </div>
+                }
             </div>
 
-            {/* <!-- Bonus --> */}
-            {/* <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) --> */}
-            <article className="create-comment">
-                <label>Add new comment:</label>
-                <form className="form">
-                    <textarea name="comment" placeholder="Comment......"></textarea>
-                    <input className="btn submit" type="submit" value="Add Comment" />
-                </form>
-            </article>
-
+            {accessToken &&
+                <article className="create-comment">
+                    <label>Add new comment:</label>
+                    <form className="form">
+                        <textarea name="comment" placeholder="Comment......"></textarea>
+                        <input className="btn submit" type="submit" value="Add Comment" />
+                    </form>
+                </article>
+            }
         </section >
     );
 }
