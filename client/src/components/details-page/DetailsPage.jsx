@@ -20,10 +20,9 @@ export default function DetailsPage() {
 
     const { values, onChange, submitHandler } = useForm(initialValues, async (values) => {
         try {
-            const result = await createComment(gameId, values);
+            await createComment(gameId, values);
 
-            navigate(`http://localhost:3030/games/${gameId}/details`)
-            console.log(result);
+            navigate(`/games`)
         } catch (err) {
             console.log(err.message);
         }

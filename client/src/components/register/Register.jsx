@@ -1,16 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useForm from "../../hooks/useForm";
 import { useRegister } from "../../hooks/useAuth";
 
 export default function Register() {
+    const navigate = useNavigate();
     const registerHandler = useRegister();
     const { values, onChange, submitHandler } = useForm(
         { email: '', password: '', "confirm-password": '' },
-        async ({ email, password }) => {
-            await registerHandler(email, password);
-            localStorage.setItem('accessToken', result.accessToken);
-            localStorage.setItem('email', result.email)
+        async ({ email, password, confirmPassword }) => {
+            try {
+                if (password !== confirmPassword) {
+                    throw new Error('Passwords do not match');
+                }
+                await registerHandler(email, password);
+                localStorage.setItem('accessToken', result.accessToken);
+                localStorage.setItem('email', result.email)
+
+                navigate('/');
+            } catch (err) {
+                console.log(err.message)
+            }
         },
     );
 
